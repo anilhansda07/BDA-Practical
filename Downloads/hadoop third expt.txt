@@ -1,0 +1,41 @@
+local host start command :  sudo /etc/init.d/ssh start
+hadoop-common-*.jar
+hadoop-mapreduce-client-core-*.jar
+
+hdfs dfs -mkdir -p /user/nani/output/wordsearchcount
+
+hdfs dfs -copyFromLocal input.txt /user/nani/input/wordcount
+
+compile command:
+javac -cp "jars/hadoop-common-3.2.1.jar:jars/hadoop-mapreduce-client-core-3.2.1.jar" WordCount.java
+
+jar command:
+jar cf wc.jar WordCount*.class
+
+run command:
+bin/hadoop jar WC.jar WordCount /user/nani/input/wordcount /user/nani/output/wordcount/output
+
+bin/hadoop fs -cat /user/nani/output/wordcount/output/part-r-00000
+
+hdfs dfs -rm -r /user/nani/output/wordsearchcount/output
+
+Search Count:
+
+bin/hadoop jar ws.jar WordSearchCount /user/nani/input/wordcount/input.txt /user/nani/output/wordsearchcount/output you
+
+bin/hadoop fs -cat /user/nani/output/wordsearchcount/output/part-r-00000
+
+stopwords:
+bin/hadoop jar sw.jar StopWords /user/nani/input/wordcount/input.txt /user/nani/input/wordcount/stopwordsinput.txt /user/nani/output/wordsearchcount/output
+
+weather 1st q:
+bin/hadoop jar ws2.jar WeatherMining2ndQ /user/nani/input/weathermining/ /user/nani/output/wordsearchcount/output116
+weather 2nd q:
+bin/hadoop jar ws1.jar WeatherMining1stQ /user/nani/input/weathermining/ /user/nani/output/wordsearchcount/output117
+
+sales1:
+bin/hadoop jar sa1.jar Sales1 /user/nani/input/sales/ /user/nani/output/sales/output
+
+bin/hadoop jar sa2.jar Sales2 /user/nani/input/sales/purchases.txt /user/nani/output/sales/output
+
+bin/hadoop jar sa3.jar Sales3 /user/nani/input/sales/purchases.txt /user/nani/output/sales/output
